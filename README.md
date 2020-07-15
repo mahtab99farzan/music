@@ -210,8 +210,8 @@ class star(mf):
         pygame.mixer.music.load(_songs[0])
         pygame.mixer.music.play()
     
-#repeatBtn = Button(root,text='repeat')
-#repeatBtn.pack()    
+repeatBtn = Button(root,text='repeat')
+repeatBtn.pack()    
 
 
 shuffleBtn = Button(root,text='Shuffle')
