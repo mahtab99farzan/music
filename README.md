@@ -1,5 +1,4 @@
 # music
-music player
 import os
 import threading
 import time
@@ -26,22 +25,24 @@ subMenu = Menu(menubar, tearoff=0)
 
 playlist = []
 
-
+class mf:
+    def __init__(self,functon1):
+        pass
 
     
-def browse_file():
-    global filename_path
-    filename_path = filedialog.askopenfilename()
-    add_to_playlist(filename_path)
-    mixer.music.queue(filename_path)
+    def browse_file(mf):
+        global filename_path
+        filename_path = filedialog.askopenfilename()
+        add_to_playlist(filename_path)
+        mixer.music.queue(filename_path)
 
 
-def add_to_playlist(filename):
-    filename = os.path.basename(filename)
-    index = 0
-    playlistbox.insert(index, filename)
-    playlist.insert(index, filename_path)
-    index += 1
+    def add_to_playlist(filename):
+        filename = os.path.basename(filename)
+        index = 0
+        playlistbox.insert(index, filename)
+        playlist.insert(index, filename_path)
+        index += 1
 
 
 menubar.add_cascade(label="File", menu=subMenu)
@@ -63,12 +64,14 @@ playlistbox.pack()
 addBtn = ttk.Button(leftframe, text="+ Add", command=browse_file)
 addBtn.pack(side=LEFT)
 
-
-def del_song():
-    selected_song = playlistbox.curselection()
-    selected_song = int(selected_song[0])
-    playlistbox.delete(selected_song)
-    playlist.pop(selected_song)
+class edit(mf):
+    def __init__(self,functions2):
+        pass
+    def del_song():
+        selected_song = playlistbox.curselection()
+        selected_song = int(selected_song[0])
+        playlistbox.delete(selected_song)
+        playlist.pop(selected_song)
 
 
 delBtn = ttk.Button(leftframe, text="- Del", command=del_song)
@@ -146,61 +149,66 @@ def play_music():
         except:
             tkinter.messagebox.showerror('File not found', 'Melody could not find the file. Please check again.')
 
-
-def stop_music(mf):
-    mixer.music.stop()
-    statusbar['text'] = "Music Stopped"
-
-
-paused = FALSE
-
-
-def pause_music():
-    global paused
-    paused = TRUE
-    mixer.music.pause()
-    statusbar['text'] = "Music Paused"
+class play(mf):
+    def __init__(self,function3):
+        pass
+    
+    def stop_music():
+        mixer.music.stop()
+        statusbar['text'] = "Music Stopped"
 
 
-def rewind_music():
-    play_music()
-    statusbar['text'] = "Music Rewinded"
+    paused = FALSE
 
 
-def set_vol(val):
-    volume = float(val) / 100
-    mixer.music.set_volume(volume)
+    def pause_music():
+        global paused
+        paused = TRUE
+        mixer.music.pause()
+        statusbar['text'] = "Music Paused"
+
+
+    def rewind_music():
+        play_music()
+        statusbar['text'] = "Music Rewinded"
+
+
+    def set_vol(val):
+        volume = float(val) / 100
+        mixer.music.set_volume(volume)
 
 
 
-muted = FALSE
+    muted = FALSE
 
-
-def mute_music():
-    global muted
-    if muted:  
-        mixer.music.set_volume(0.7)
-        volumeBtn.configure(image=volumePhoto)
-        scale.set(70)
-        muted = FALSE
-    else: 
-        mixer.music.set_volume(0)
-        volumeBtn.configure(image=mutePhoto)
-        scale.set(0)
-        muted = TRUE
+class star(mf):
+    def __init__(self,function4):
+        pass
+    def mute_music():
+        global muted
+        if muted:  
+            mixer.music.set_volume(0.7)
+            volumeBtn.configure(image=volumePhoto)
+            scale.set(70)
+            muted = FALSE
+        else: 
+            mixer.music.set_volume(0)
+            volumeBtn.configure(image=mutePhoto)
+            scale.set(0)
+            muted = TRUE
         
-def Shuffle(event):
-    global index
-    index = random.randint(0,len(listofsongs)+1)
-    pygame.mixer.music.load(listofsongs[index])
-    pygame.mixer.music.play()
-    updatelabel()
+    def Shuffle(event):
+        global index
+        index = random.randint(0,len(listofsongs)+1)
+        pygame.mixer.music.load(listofsongs[index])
+        pygame.mixer.music.play()
+        updatelabel()
 
-def play_next_song():
-    global _songs
-    _songs = _songs[1:] + [_songs[0]] 
-    pygame.mixer.music.load(_songs[0])
-    pygame.mixer.music.play()
+    def play_next_song():
+        global _songs
+        _songs = _songs[1:] + [_songs[0]] 
+        pygame.mixer.music.load(_songs[0])
+        pygame.mixer.music.play()
     
 #repeatBtn = Button(root,text='repeat')
 #repeatBtn.pack()    
